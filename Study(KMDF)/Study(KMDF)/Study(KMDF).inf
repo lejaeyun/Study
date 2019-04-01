@@ -1,0 +1,86 @@
+;
+; Study(KMDF).inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=Study(KMDF).cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+Study(KMDF)_Device_CoInstaller_CopyFiles = 11
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+Study(KMDF).sys  = 1,,
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%Study(KMDF).DeviceDesc%=Study(KMDF)_Device, Root\Study(KMDF) ; TODO: edit hw-id
+
+[Study(KMDF)_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+Study(KMDF).sys
+
+;-------------- Service installation
+[Study(KMDF)_Device.NT.Services]
+AddService = Study(KMDF),%SPSVCINST_ASSOCSERVICE%, Study(KMDF)_Service_Inst
+
+; -------------- Study(KMDF) driver install sections
+[Study(KMDF)_Service_Inst]
+DisplayName    = %Study(KMDF).SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\Study(KMDF).sys
+
+;
+;--- Study(KMDF)_Device Coinstaller installation ------
+;
+
+[Study(KMDF)_Device.NT.CoInstallers]
+AddReg=Study(KMDF)_Device_CoInstaller_AddReg
+CopyFiles=Study(KMDF)_Device_CoInstaller_CopyFiles
+
+[Study(KMDF)_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[Study(KMDF)_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[Study(KMDF)_Device.NT.Wdf]
+KmdfService =  Study(KMDF), Study(KMDF)_wdfsect
+[Study(KMDF)_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "Study(KMDF) Installation Disk"
+Study(KMDF).DeviceDesc = "Study(KMDF) Device"
+Study(KMDF).SVCDESC = "Study(KMDF) Service"
