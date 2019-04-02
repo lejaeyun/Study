@@ -9,9 +9,8 @@ BOOL InjectDll(DWORD dwPID, LPCTSTR DllName)
 	DWORD dwBufSize = lstrlen(DllName) + 1;
 	LPTHREAD_START_ROUTINE pThreadProc;
 
-	HMODULE h_Ntdll = LoadLibrary("NTDLL.DLL");
-
-	pThreadProc = (LPTHREAD_START_ROUTINE)GetProcAddress(GetModuleHandle("ntdll.dll"), "LoadLibraryA");
+	//HMODULE h_Ntdll = LoadLibrary("NTDLL.DLL");
+	//pThreadProc = (LPTHREAD_START_ROUTINE)GetProcAddress(GetModuleHandle("ntdll.dll"), "LoadLibraryA");
 
 	hProcess = OpenProcess(PROCESS_ALL_ACCESS, TRUE, dwPID);
 	if (hProcess == NULL)

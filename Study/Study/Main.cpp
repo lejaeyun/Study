@@ -2,9 +2,9 @@
 #include "pch.h"
 #include "Source.h"
 
-#define DEF_PROC_NAME ("Notepad.exe")
-#define DEF_DLL_PATH ("C:\TEST\\test_64.dll")
-#define DEF_DLL_NAME ("test_64.dll")
+#define DEF_PROC_NAME ("gamer.exe")
+#define DEF_DLL_PATH ("C:\TEST\\test_32.dll")
+#define DEF_DLL_NAME ("test_32.dll")
 
 int main(int argc, char* argv[])
 {	
@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 	else if (result == FALSE)
 		printf("Dll Injection FAILED\n");
 
-	printf("asdfasfas\n");
+	printf("\n\n\n\n");
 	Sleep(1500);
 
 	result = EjectDll(dwPID, DEF_DLL_NAME);

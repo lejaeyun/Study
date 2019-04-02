@@ -9,27 +9,6 @@
 #ifndef PCH_H
 #define PCH_H
 
-#pragma once
-
-#include "targetver.h"
-
-#include <stdio.h>
-#include <tchar.h>
-#include <stdio.h>
-#include <windows.h>
-#include <string>
-#include <time.h>
-#include <stdlib.h>
-#include <iostream>
-#include <tlhelp32.h>
-#include <psapi.h> 
-#include <sddl.h>
-#include <accctrl.h>
-#include <conio.h>
-#include <aclapi.h>
-#include "Xor.h"
-#pragma comment(lib, "Ws2_32.lib")
-using namespace std;
 // TODO: 여기에 미리 컴파일하려는 헤더 추가
 
 #endif //PCH_H

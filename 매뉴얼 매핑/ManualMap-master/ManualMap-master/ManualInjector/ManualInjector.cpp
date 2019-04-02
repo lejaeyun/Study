@@ -143,7 +143,7 @@ DWORD __stdcall stub()
 int main()
 {
 	// Target Dll
-	LPCSTR Dll = "D:\\Projects\\ManualMap\\Release\\TargetDll.dll";
+	LPCSTR Dll = "D:\\TEST\\test_32.dll";
 
 	DWORD ProcessId = FindProcessId("gamer.exe");
 
